@@ -1,0 +1,148 @@
+SELECT *  
+FROM film;
+
+/*------------------------------ DISTINCT function ----------------------------------------------------- */
+
+/* The DISTINCT keyword can be used to return only the distinct values in a column*/
+
+SELECT DISTINCT(rental_rate) 
+FROM film /* From this what we can infer is that there were only 3 distinct rates for 
+											renting the dvd*/
+											
+/* DISTINCT types of rating available in our dvdrental database*/
+
+SELECT DISTINCT(rating)
+FROM film /* So, it turns out that there are distinct 5 mpaa ratings*/
+
+/*------------------------------------ COUNT FUNCTION -------------------------------------------------------*/
+/* This basically answers the question of how many rows are in the table */
+
+SELECT COUNT(*)
+FROM film
+
+/*------------------------ USING COUNT AND DISTINCT TOGETHER -------------------------------------------------*/
+
+SELECT * FROM film
+
+/* QNS: How many distinct rental duration you can find in the table "film"? */
+
+SELECT COUNT(DISTINCT(rental_duration))
+FROM film 
+						/* The answer is 5 */
+
+
+/*------------------------ WHERE STATEMENTS -----------------------------------------------------------------*/
+/* WHERE statements allow us to specify conditions on columns for the rows to be returned */
+
+/* Lets say we only wanna have info about one customer named Jared*/
+
+SELECT *
+FROM customer
+WHERE first_name='Jared'
+
+/* Find all the rental rates that are above 4 dollars from the film table*/
+
+SELECT *
+FROM film
+WHERE rental_rate>4
+
+		/* So, how many were there? can you give me a number? */
+		
+SELECT COUNT(*)
+FROM film
+WHERE rental_rate>4  /* The ans is 336 */
+
+		/* Lets add 1 more layer to it. On the top of above condition, also add replacement costs of 19.99*/
+		
+SELECT *
+FROM film
+WHERE rental_rate>4 AND replacement_cost>=19.99
+
+		/* How many were there? */
+		
+SELECT COUNT(*)
+FROM film
+WHERE rental_rate>4 AND replacement_cost>=19.99
+		/* There were 173 movies that had their rental rates above 4.99 and replacement costs greater than or equal
+		to 19.99 */
+		
+/*------------------------------------- PRACTICE QUESTION -----------------------------------------------------*/
+
+/* A customer forgot their wallet at our work store! We need to track down her email to inform her. Whats the email
+of the customer with the name "Nancy Thomas"?*/
+
+SELECT email
+FROM customer
+WHERE first_name='Nancy' AND last_name='Thomas'
+
+/* The email is nancy.thomas@sakilacustomer.org */
+
+/* A customer wants to know what the movie "Outlaw Hanky" is about. Could you give them the description for the
+ movie "Outlaw Hanky"?*/
+ 
+SELECT description
+FROM film
+WHERE title='Outlaw Hanky'
+
+/* Can you get the phone number for the customer who lives at "259 Ipoh Drive"?*/
+
+SELECT phone
+FROM address
+WHERE address='259 Ipoh Drive'
+
+/*-------------------------------------- ORDER BY ----------------------------------------------------------- */
+
+
+/* ordering by the first name of the customer*/
+
+SELECT first_name
+FROM customer
+ORDER BY first_name DESC /* if I do not specify anything i.e. ascending or descending, the sql performs
+						a aescending operation*/
+						
+/* USING ORDER BY in the case of multiple columns*/
+
+SELECT store_id, first_name, last_name
+FROM customer
+ORDER BY store_id, first_name /* What this does is it first orders the store_id in an ascending format and within that
+							already formatted store_id, we now order the first name.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
