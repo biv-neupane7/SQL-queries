@@ -105,7 +105,183 @@ ORDER BY first_name DESC /* if I do not specify anything i.e. ascending or desce
 SELECT store_id, first_name, last_name
 FROM customer
 ORDER BY store_id, first_name /* What this does is it first orders the store_id in an ascending format and within that
-							already formatted store_id, we now order the first name.
+							already formatted store_id, we now order the first name */
+
+
+/*----------------------------------- LIMIT -----------------------------------------*/
+
+SELECT *
+FROM payment
+WHERE amount != 0
+ORDER BY amount DESC
+LIMIT 5
+
+/*---------------------------------- Exercise qns ---------------------------------*/
+
+/* QNS: What are the customer ids of the first 10 customers who created a payment? */
+
+
+SELECT customer_id
+FROM payment
+ORDER BY payment_date
+LIMIT 10
+
+/* What are the titles of the 5 shortest (in length of runtime) movies? */
+
+SELECT title, length
+FROM film
+ORDER BY length 
+LIMIT 5
+
+/* If the customer can watch any movie that <= 50 minutes in runtime, how many options does she have? */
+
+SELECT COUNT(title)
+FROM film
+WHERE length<=50
+
+/*-------------------------------------- BETWEEN --------------------------------------------- */
+
+SELECT *
+FROM payment
+LIMIT 2
+
+/* What is the number of payments that were done between 8 and 9 dollars? */
+
+SELECT COUNT(*)
+FROM payment
+WHERE amount BETWEEN 8 AND 9
+
+/* What about payments not between 8 and 9 dollars? */
+
+SELECT COUNT(*)
+FROM payment
+WHERE amount NOT BETWEEN 8 AND 9
+
+/* payment between certain dates */
+
+SELECT *
+FROM payment
+WHERE payment_date BETWEEN '2007-02-01' AND '2007-02-14' 
+
+/*---------------------------------- LIKE AND ILIKE --------------------------------------------- */
+
+/* QNS: How many people actually have a name that starts with "J"? */
+
+SELECT COUNT(*)
+FROM customer
+WHERE first_name LIKE 'J%' 
+
+/*--------------------------------- CHALLENGE TASK ---------------------------------------- */
+
+/* QNS: How many payment transactions were greater than $5 ? */
+
+SELECT COUNT(*)
+FROM payment
+WHERE amount > 5
+
+/* QNS: How many actors have a first name that starts with the letter "P" ?*/
+
+SELECT COUNT(*)
+FROM actor
+WHERE first_name LIKE 'P%'
+
+
+/* How many unique districts are our customers from? */
+
+SELECT COUNT(DISTINCT(district))
+FROM address
+
+/* Retrieve the list  of names of those distinct districts from the previous question */
+
+SELECT DISTINCT(district)
+FROM address
+
+/* How many films have a rating of R and a replacement cost between $5 and $15 ? */
+
+SELECT COUNT(*)
+FROM film
+WHERE rating= 'R' 
+AND replacement_cost BETWEEN 5 AND 15;
+
+/* How many firms have the word Truman somewhere in the title? */
+
+SELECT COUNT(*)
+FROM film
+WHERE title LIKE '%Truman%'
+
+/*------------------------------------------ AGG Functions-------------------------------------*/
+
+/* MIN, MAX, AVG, COUNT, SUM etc. */
+
+/*-------------------------------------------- GROUP BY FUNCTION ---------------------------------*/
+
+SELECT customer_id
+FROM payment
+GROUP BY customer_id /* Since we are not performing any AGG function here, this is just a long way of asking for
+						the distinct or unique customer_ids */
+						
+
+/* QNS: Which customer is spending the most money in total? */
+
+SELECT customer_id, SUM(amount)
+FROM payment
+GROUP BY customer_id 
+ORDER BY SUM(amount) DESC /* ANS: The customer whose id is 148 is spending the highest amount of money */
+
+/* Grouping by date */
+
+SELECT DATE(payment_date), SUM(amount)
+FROM payment
+GROUP BY DATE(payment_date)
+ORDER BY SUM(amount) DESC
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
