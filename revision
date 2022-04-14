@@ -235,6 +235,62 @@ FROM payment
 GROUP BY DATE(payment_date)
 ORDER BY SUM(amount) DESC
 
+/*------------------------------------ CHALLENGE QNS ----------------------------------------------------------*/
+
+/* QNS: We have two staff ids 1 and 2. We want to give bonus to the staff that handled most payments in terms of
+	total number of payments processed not the dollar amount. 
+	
+	How many payments did each staff member handle and who will get the bonus? */
+	
+	
+SELECT staff_id, COUNT(payment_id)
+FROM payment
+GROUP BY staff_id
+		/* ANS: Since staff 2 had higher number of payments handled, he/she/they should get the bonus*/
+		
+/* QNS: Relationship between replacement cost and a movie MPAA rating (G, PG, R, etc.)
+		What is the avg replacement cost per MPAA rating? */
+		
+		
+SELECT rating, ROUND(AVG(replacement_cost),2)
+FROM film
+GROUP BY rating
+		
+/* QNS: Rewarding our top 5 customers. What are the customer ids of the top 5 customers by total spend? */
+
+
+SELECT customer_id, SUM(amount)
+FROM payment
+GROUP BY customer_id
+ORDER BY SUM(amount) DESC
+LIMIT 5
+
+
+
+
+
+
+
+
+
+
+
+
+		
+
+		
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
